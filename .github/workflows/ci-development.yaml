@@ -1,18 +1,22 @@
-name: wf-ci-development
-on: 
+name: wf-develop-pr
+on:
   pull_request:
     branches:
-      - develop
+      - develop 
 jobs:
-  ci-development-job:
+  develop-pr-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository 
+      - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: Lint HTML and Css
+      - name: Lint HTML and CSS
         run: |
           npx htmlhint "**/*.html"
-          npx stylehint "**/*.css"
-      - name: Test Build Ops
-        run: |
-          npx parcel build "./src/index.html" --dist-dir "./dist" --public-url "./"       
+          npx stylelint "**/*.css"
+  build-job:   
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4     
+      - name: Build Website
+        run: npx parcel build "./src/index.html" --dist-dir "./dev" --public-url "./"
