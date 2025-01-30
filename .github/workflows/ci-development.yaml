@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository 
-        uses: action/checkout@v4
+        uses: actions/checkout@v4
       - name: Lint HTML and Css
         run: |
           npx htmlhint "**/*.html"
@@ -16,4 +16,3 @@ jobs:
       - name: Test Build Ops
         run: |
           npx parcel build "./src/index.html" --dist-dir "./dist" --public-url "./"       
-               
